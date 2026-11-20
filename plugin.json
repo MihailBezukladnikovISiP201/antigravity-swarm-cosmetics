@@ -1,0 +1,21 @@
+{
+  "name": "swarm-cosmetics",
+  "displayName": "Swarm Cosmetics (Bee Hats)",
+  "description": "Procedural pixel-art hats for agents in Antigravity Swarm mode based on their assigned roles.",
+  "version": "1.1.0",
+  "author": "Mikhail Bezukladnikov",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MihailBezukladnikovISiP201/antigravity-swarm-cosmetics.git"
+  },
+  "keywords": [
+    "antigravity",
+    "swarm",
+    "cosmetics",
+    "pixel-art",
+    "hats",
+    "agents"
+  ],
+  "logo": "assets/logo.svg"
+}
