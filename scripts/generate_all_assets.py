@@ -67,7 +67,7 @@ def get_hat_type(name):
         return 'crown'
     if re.search(r'verifier|review|qa|test|audit|lint|check', n):
         return 'mortarboard'
-    if re.search(r'builder|author|dev|code|parser|impl|worker|fix|patch|engineer', n):
+    if re.search(r'builder|author|dev|code|parser|impl|fix|patch|engineer', n):
         return 'hardhat'
     if re.search(r'research|scout|investig|search|doc|read|explore|analyst', n):
         return 'tophat'

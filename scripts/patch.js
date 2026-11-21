@@ -37,7 +37,7 @@ const PATCH_CODE = `${PATCH_HEADER}
       n = String(n).toLowerCase();
       if(queen || n==='coordinator') return 'crown';
       if(/verifier|review|qa|test|audit|lint|check/.test(n)) return 'mortarboard';
-      if(/builder|author|dev|code|parser|impl|worker|fix|patch|engineer/.test(n)) return 'hardhat';
+      if(/builder|author|dev|code|parser|impl|fix|patch|engineer/.test(n)) return 'hardhat';
       if(/research|scout|investig|search|doc|read|explore|analyst/.test(n)) return 'tophat';
       if(/narrator|story|scribe|log|write|history/.test(n)) return 'beret';
       if(/monitor|guard|watch|stall|dispatch|ping/.test(n)) return 'police';
