@@ -400,7 +400,7 @@ def generate_banner():
         dy += 22
 
     # Feature tags
-    tags = ["👑 10 Custom Hats", "🐝 Procedural Pixels", "🔄 Hook Persistence", "⚡ Zero Overhead"]
+    tags = ["10 Custom Hats", "22x18 Pixel Sprites", "Hook Persistence", "Zero Overhead"]
     tx = 60
     tag_font = get_font(12, bold=True)
     for t in tags:
@@ -411,12 +411,12 @@ def generate_banner():
 
     # Right side: Swarm formation of bees with different hats
     bees_spec = [
-        ('coordinator', 'flight', 0, 850, 150, 7.5, "👑 Queen Coordinator"),
-        ('builder-1', 'flight', 1, 710, 110, 6.0, "⛑️ Builder"),
-        ('verifier-1', 'flight', 0, 1000, 120, 6.0, "🎓 Verifier"),
-        ('wizard-1', 'flight', 1, 730, 240, 6.0, "🧙 Wizard"),
-        ('researcher-1', 'flight', 0, 980, 250, 6.0, "🎩 Researcher"),
-        ('pirate-1', 'flight', 1, 860, 290, 5.5, "🏴‍☠️ Security"),
+        ('coordinator', 'flight', 0, 850, 150, 7.5, "Queen Coordinator"),
+        ('builder-1', 'flight', 1, 710, 110, 6.0, "Builder"),
+        ('verifier-1', 'flight', 0, 1000, 120, 6.0, "Verifier"),
+        ('wizard-1', 'flight', 1, 730, 240, 6.0, "Wizard"),
+        ('researcher-1', 'flight', 0, 980, 250, 6.0, "Researcher"),
+        ('pirate-1', 'flight', 1, 860, 290, 5.5, "Security"),
     ]
 
     # Draw bees
@@ -451,17 +451,17 @@ def generate_roles_showcase():
 
     # Catalog items: (Role Title, Hat Name, Name Pattern, Description, Sample Name)
     catalog = [
-        ("Coordinator", "👑 Crown with Ruby", "coordinator", "Queen bee / swarm lead. Coordinates all workers.", "coordinator"),
-        ("Builder / Dev", "⛑️ Yellow Hard Hat", "builder, dev, fix, code", "Authors writing code, implementing features & fixes.", "builder-1"),
-        ("Verifier / QA", "🎓 Mortarboard", "verifier, qa, test, check", "Validates diffs, runs test suites, quality assurance.", "verifier-1"),
-        ("Researcher", "🎩 Top Hat with Ribbon", "research, scout, doc", "Codebase exploration, architectural discovery.", "researcher-1"),
-        ("Narrator", "🪶 Beret with Quill", "narrator, story, log", "System agent logging high-level project timeline.", "narrator"),
-        ("Monitor", "👮 Peaked Officer Cap", "monitor, guard, watch", "Anti-stall watchdog and swarm activity monitor.", "monitor"),
-        ("Wizard / AI", "🧙 Pointed Star Hat", "wizard, ai, model, llm", "Prompt engineering, LLM synthesis, neural tasks.", "wizard-1"),
-        ("Pirate / Security", "🏴‍☠️ Tricorn & Eyepatch", "pirate, sec, pentest", "Security audits, vulnerability research, pentest.", "pirate-1"),
-        ("Chef / Data", "🧑‍🍳 Puffed Chef Toque", "chef, data, etl, clean", "ETL pipelines, data parsing, dataset curation.", "chef-1"),
-        ("Viking / Stress", "🛡️ Horned Helmet", "viking, stress, bench", "Performance benchmarks, stress & load testing.", "viking-1"),
-        ("Standard Worker", "📡 Natural Antennae", "(Default / unassigned)", "General-purpose parallel worker tasks.", "worker-99")
+        ("Coordinator", "Crown with Ruby", "coordinator", "Queen bee / swarm lead. Coordinates all workers.", "coordinator"),
+        ("Builder / Dev", "Yellow Hard Hat", "builder, dev, fix, code", "Authors writing code, implementing features & fixes.", "builder-1"),
+        ("Verifier / QA", "Academic Mortarboard", "verifier, qa, test, check", "Validates diffs, runs test suites, quality assurance.", "verifier-1"),
+        ("Researcher", "Top Hat with Ribbon", "research, scout, doc", "Codebase exploration, architectural discovery.", "researcher-1"),
+        ("Narrator", "Beret with Quill", "narrator, story, log", "System agent logging high-level project timeline.", "narrator"),
+        ("Monitor", "Peaked Officer Cap", "monitor, guard, watch", "Anti-stall watchdog and swarm activity monitor.", "monitor"),
+        ("Wizard / AI", "Pointed Star Hat", "wizard, ai, model, llm", "Prompt engineering, LLM synthesis, neural tasks.", "wizard-1"),
+        ("Pirate / Security", "Tricorn & Eyepatch", "pirate, sec, pentest", "Security audits, vulnerability research, pentest.", "pirate-1"),
+        ("Chef / Data", "Puffed Chef Toque", "chef, data, etl, clean", "ETL pipelines, data parsing, dataset curation.", "chef-1"),
+        ("Viking / Stress", "Horned Helmet", "viking, stress, bench", "Performance benchmarks, stress & load testing.", "viking-1"),
+        ("Standard Worker", "Natural Antennae", "(Default / unassigned)", "General-purpose parallel worker tasks.", "worker-99")
     ]
 
     card_w = 346
@@ -609,11 +609,11 @@ def generate_swarm_preview():
     draw.text((split_x + 30, 106), "LIVE BOARD FEED", fill=(170, 176, 200), font=left_font)
 
     feed = [
-        ("coordinator", "👑 coordinator", "2m ago", "Launched cosmetic patch task. Spawning builder-1 and verifier-1 for execution.", (255, 200, 60)),
-        ("builder-1", "⛑️ builder-1", "1m ago", "@coordinator Implemented 10 procedural headgear shaders into hive.js canvas pipeline.", (100, 200, 255)),
-        ("wizard-1", "🧙 wizard-1", "45s ago", "@coordinator Verified pixel alignment and contrast ratios across light and dark backgrounds.", (180, 130, 255)),
-        ("verifier-1", "🎓 verifier-1", "20s ago", "@coordinator Ran full integration test suite. Cache busting verified. All 14 tests passed.", (34, 197, 94)),
-        ("builder-2", "⛑️ builder-2", "Just now", "Generated ultra-crisp showcase graphic assets for GitHub documentation.", (255, 160, 60))
+        ("coordinator", "@coordinator", "2m ago", "Launched cosmetic patch task. Spawning builder-1 and verifier-1 for execution.", (255, 200, 60)),
+        ("builder-1", "@builder-1", "1m ago", "@coordinator Implemented 10 procedural headgear shaders into hive.js canvas pipeline.", (100, 200, 255)),
+        ("wizard-1", "@wizard-1", "45s ago", "@coordinator Verified pixel alignment and contrast ratios across light and dark backgrounds.", (180, 130, 255)),
+        ("verifier-1", "@verifier-1", "20s ago", "@coordinator Ran full integration test suite. Cache busting verified. All 14 tests passed.", (34, 197, 94)),
+        ("builder-2", "@builder-2", "Just now", "Generated ultra-crisp showcase graphic assets for GitHub documentation.", (255, 160, 60))
     ]
 
     fy = 140
@@ -646,11 +646,11 @@ def generate_demo_gif():
 
     # Hats showcase in demo
     showcase_bees = [
-        ('coordinator', '👑 Coordinator', 70, 110),
-        ('builder-1', '⛑️ Builder', 180, 110),
-        ('verifier-1', '🎓 Verifier', 290, 110),
-        ('wizard-1', '🧙 Wizard', 400, 110),
-        ('viking-1', '🛡️ Viking', 510, 110),
+        ('coordinator', 'Coordinator', 70, 110),
+        ('builder-1', 'Builder', 180, 110),
+        ('verifier-1', 'Verifier', 290, 110),
+        ('wizard-1', 'Wizard', 400, 110),
+        ('viking-1', 'Viking', 510, 110),
     ]
 
     for f in range(6):
