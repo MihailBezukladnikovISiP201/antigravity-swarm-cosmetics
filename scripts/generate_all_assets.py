@@ -374,10 +374,10 @@ def generate_banner():
 
     # Badge Pill: ANTIGRAVITY PLUGIN
     pill_x, pill_y = 60, 52
-    draw.rounded_rectangle([pill_x, pill_y, pill_x + 230, pill_y + 30], radius=15, fill=(35, 39, 54, 230), outline=(99, 102, 241, 200), width=1)
+    draw.rounded_rectangle([pill_x, pill_y, pill_x + 210, pill_y + 30], radius=15, fill=(35, 39, 54, 230), outline=(99, 102, 241, 200), width=1)
     badge_font = get_font(13, bold=True)
-    draw.text((pill_x + 14, pill_y + 6), "⚡ GOOGLE ANTIGRAVITY", fill=(255, 200, 60), font=badge_font)
-    draw.text((pill_x + 168, pill_y + 6), "PLUGIN", fill=(190, 195, 220), font=badge_font)
+    draw.text((pill_x + 16, pill_y + 6), "GOOGLE ANTIGRAVITY", fill=(255, 200, 60), font=badge_font)
+    draw.text((pill_x + 152, pill_y + 6), "PLUGIN", fill=(190, 195, 220), font=badge_font)
 
     # Main Title
     title_font = get_font(44, bold=True)
@@ -519,7 +519,7 @@ def generate_roles_showcase():
 
     # Footer note
     foot_font = get_font(13, bold=False)
-    draw.text((60, H - 40), "💡 Role names are matched automatically by substring regex inside Antigravity Swarm Board.", fill=(110, 116, 135), font=foot_font)
+    draw.text((60, H - 40), "Role names are matched automatically by substring regex inside Antigravity Swarm Board.", fill=(110, 116, 135), font=foot_font)
 
     showcase_path = os.path.join(ASSETS_DIR, 'roles-showcase.png')
     img.save(showcase_path, 'PNG')
@@ -553,7 +553,7 @@ def generate_swarm_preview():
 
     # Subtitle / Conv ID
     meta_font = get_font(12, mono=True)
-    draw.text((185, 50), "• Conv: 4c2f696e • 6 Active Workers", fill=(130, 135, 155), font=meta_font)
+    draw.text((185, 50), "| Conv: 4c2f696e | 6 Active Workers", fill=(130, 135, 155), font=meta_font)
 
     # Tabs (Overview, Board, Members, Graph, Raw)
     tabs = [("Overview", False), ("Board (6)", True), ("Members (8)", False), ("Graph", False), ("Raw", False)]
@@ -659,7 +659,8 @@ def generate_demo_gif():
 
         # Title
         draw.text((20, 18), "LIVE PIXEL HEADGEAR PREVIEW", fill=(255, 199, 44), font=get_font(13, bold=True))
-        draw.text((W - 130, 18), "● ANIMATED", fill=(34, 197, 94), font=get_font(12, bold=True))
+        draw.ellipse([W - 145, 23, W - 137, 31], fill=(34, 197, 94))
+        draw.text((W - 130, 18), "ANIMATED", fill=(34, 197, 94), font=get_font(12, bold=True))
         draw.line([20, 42, W - 20, 42], fill=(35, 40, 58), width=1)
 
         # Draw bees with sinusoidal bobbing

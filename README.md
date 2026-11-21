@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.png" alt="Swarm Cosmetics for Google Antigravity" width="100%">
+  <img src="assets/banner.png?v=2" alt="Swarm Cosmetics for Google Antigravity" width="100%">
 </p>
 
 <p align="center">
@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/demo.gif" alt="Animated Pixel Headgear Preview" width="640">
+  <img src="assets/demo.gif?v=2" alt="Animated Pixel Headgear Preview" width="640">
 </p>
 
 ---
@@ -29,7 +29,7 @@ Headgear is rendered deterministically directly inside the HTML5 canvas pipeline
 ## Swarm UI in Action
 
 <p align="center">
-  <img src="assets/swarm-preview.png" alt="Antigravity Swarm Board UI with Custom Headgear" width="100%">
+  <img src="assets/swarm-preview.png?v=2" alt="Antigravity Swarm Board UI with Custom Headgear" width="100%">
 </p>
 
 ---
@@ -37,7 +37,7 @@ Headgear is rendered deterministically directly inside the HTML5 canvas pipeline
 ## Role Headgear Catalog
 
 <p align="center">
-  <img src="assets/roles-showcase.png" alt="Role Headgear Catalog" width="100%">
+  <img src="assets/roles-showcase.png?v=2" alt="Role Headgear Catalog" width="100%">
 </p>
 
 | Role | Name Pattern Matchers | Headgear | Purpose & Responsibilities |
