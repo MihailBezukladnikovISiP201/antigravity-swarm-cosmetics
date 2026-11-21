@@ -1,0 +1,7 @@
+{
+  "overrides": {
+    "lead": "crown",
+    "infra-.*": "hardhat",
+    "security-.*": "pirate"
+  }
+}

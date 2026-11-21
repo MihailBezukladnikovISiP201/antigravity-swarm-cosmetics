@@ -1,11 +1,24 @@
 import os
 import math
 import re
+import json
 from PIL import Image, ImageDraw, ImageFont
 
 # Ensure output directory exists
 ASSETS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets')
 os.makedirs(ASSETS_DIR, exist_ok=True)
+
+# Load config overrides if available
+CONFIG_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'cosmetics.config.json')
+CONFIG_OVERRIDES = {}
+if os.path.exists(CONFIG_PATH):
+    try:
+        with open(CONFIG_PATH, 'r', encoding='utf-8') as f:
+            cdata = json.load(f)
+            if isinstance(cdata, dict) and 'overrides' in cdata:
+                CONFIG_OVERRIDES = cdata['overrides']
+    except Exception:
+        pass
 
 # Colors
 def hex2rgb(h):
@@ -65,6 +78,23 @@ def get_hat_type(name):
     n = str(name).lower()
     if n == 'coordinator' or 'queen' in n:
         return 'crown'
+
+    # 1. Custom config exact overrides
+    for k, v in CONFIG_OVERRIDES.items():
+        if not any(c in k for c in '*+?^${}()|[]\\'):
+            if n == k.lower():
+                return v
+
+    # 2. Custom config regex overrides
+    for k, v in CONFIG_OVERRIDES.items():
+        if any(c in k for c in '*+?^${}()|[]\\'):
+            try:
+                if re.search(k, n):
+                    return v
+            except Exception:
+                pass
+
+    # 3. Default role-based headgear
     if re.search(r'verifier|review|qa|test|audit|lint|check', n):
         return 'mortarboard'
     if re.search(r'builder|author|dev|code|parser|impl|fix|patch|engineer', n):
@@ -83,6 +113,12 @@ def get_hat_type(name):
         return 'chef'
     if re.search(r'viking|stress|bench|perf|load|speed|opt|heavy', n):
         return 'viking'
+    if re.search(r'headphones|listen|audio|music|sound', n):
+        return 'headphones'
+    if re.search(r'goggles|visor|scanner|telemetry|trace|debug|inspect', n):
+        return 'goggles'
+    if re.search(r'ninja|stealth|shadow|silent|crypto|mask|bandana', n):
+        return 'bandana'
     return 'default'
 
 def draw_bee_sprite(name, state='flight', frame=0, forced_hat=None):
@@ -302,6 +338,33 @@ def draw_bee_sprite(name, state='flight', frame=0, forced_hat=None):
             P(x, 3, vkl)
         P(4, 4, hr); P(3, 3, hr); P(2, 2, hrt)
         P(10, 4, hr); P(11, 3, hr); P(12, 2, hrt)
+    elif hat == 'headphones':
+        hpd, hpl, hpcl, hpg = '#1E293B', '#64748B', '#14B8A6', '#5EEAD4'
+        for x in range(4, 11): P(x, 2, hpd)
+        for x in [6, 7, 8]: P(x, 2, hpl)
+        P(3, 3, hpd); P(11, 3, hpd)
+        for y in range(4, 8): P(3, y, hpd)
+        P(2, 5, hpd); P(2, 6, hpd); P(3, 5, hpg); P(3, 6, hpcl)
+        for y in range(4, 8): P(11, y, hpd)
+        P(12, 5, hpd); P(12, 6, hpd); P(11, 5, hpg); P(11, 6, hpcl)
+    elif hat == 'goggles':
+        gst, gsh, gc, gcl, gch, gled = '#0F172A', '#334155', '#06B6D4', '#22D3EE', '#E0F2FE', '#10B981'
+        for x in [3, 4]: P(x, 9, gst)
+        for x in [10, 11, 12]: P(x, 9, gst)
+        P(10, 9, gsh)
+        for x in range(5, 10): P(x, 8, gst)
+        P(7, 8, gled)
+        P(5, 9, gc); P(6, 9, gch); P(7, 9, gcl); P(8, 9, gc); P(9, 9, gc)
+        for x in range(5, 9): P(x, 10, gc)
+        P(6, 10, gcl); P(7, 10, gcl)
+    elif hat == 'bandana':
+        bd1, bd2, bd3, bmp, bmpd = '#DC2626', '#EF4444', '#991B1B', '#E2E8F0', '#64748B'
+        for x in range(5, 10): P(x, 4, bd2)
+        for x in range(4, 11): P(x, 5, bd1)
+        P(4, 5, bd3); P(10, 5, bd3)
+        P(6, 5, bmp); P(7, 5, bmp); P(8, 5, bmpd)
+        P(11, 5, bd3); P(11, 6, bd1)
+        P(12, 5, bd1); P(13, 6, bd2); P(14, 6, bd1); P(12, 7, bd3); P(13, 7, bd1)
     else:
         for x, y in [[7, 5], [6, 4], [5, 3]]:
             P(x, y, R['ol'])
@@ -400,7 +463,7 @@ def generate_banner():
         dy += 22
 
     # Feature tags
-    tags = ["10 Custom Hats", "22x18 Pixel Sprites", "Hook Persistence", "Zero Overhead"]
+    tags = ["13 Custom Hats", "22x18 Pixel Sprites", "Wardrobe UI Tab", "Zero Overhead"]
     tx = 60
     tag_font = get_font(12, bold=True)
     for t in tags:
@@ -411,12 +474,12 @@ def generate_banner():
 
     # Right side: Swarm formation of bees with different hats
     bees_spec = [
-        ('coordinator', 'flight', 0, 850, 150, 7.5, "Queen Coordinator"),
-        ('builder-1', 'flight', 1, 710, 110, 6.0, "Builder"),
-        ('verifier-1', 'flight', 0, 1000, 120, 6.0, "Verifier"),
-        ('wizard-1', 'flight', 1, 730, 240, 6.0, "Wizard"),
-        ('researcher-1', 'flight', 0, 980, 250, 6.0, "Researcher"),
-        ('pirate-1', 'flight', 1, 860, 290, 5.5, "Security"),
+        ('coordinator', 'flight', 0, 850, 140, 7.5, "Queen Coordinator"),
+        ('builder-1', 'flight', 1, 710, 100, 6.0, "Builder"),
+        ('verifier-1', 'flight', 0, 1000, 110, 6.0, "Verifier"),
+        ('headphones-1', 'flight', 1, 690, 230, 5.8, "Studio Audio"),
+        ('goggles-1', 'flight', 0, 850, 275, 6.0, "Telemetry Visor"),
+        ('bandana-1', 'flight', 1, 1010, 240, 5.8, "Stealth Ninja"),
     ]
 
     # Draw bees
@@ -439,7 +502,7 @@ def generate_banner():
 # 2. GENERATE ROLES SHOWCASE (assets/roles-showcase.png)
 # -------------------------------------------------------------
 def generate_roles_showcase():
-    W, H = 1200, 920
+    W, H = 1200, 1100
     img = Image.new('RGBA', (W, H), (17, 19, 26, 255))
     draw = ImageDraw.Draw(img)
 
@@ -461,6 +524,9 @@ def generate_roles_showcase():
         ("Pirate / Security", "Tricorn & Eyepatch", "pirate, sec, pentest", "Security audits, vulnerability research, pentest.", "pirate-1"),
         ("Chef / Data", "Puffed Chef Toque", "chef, data, etl, clean", "ETL pipelines, data parsing, dataset curation.", "chef-1"),
         ("Viking / Stress", "Horned Helmet", "viking, stress, bench", "Performance benchmarks, stress & load testing.", "viking-1"),
+        ("Audio / Listener", "Studio Headset", "headphones, audio, sound", "Audio review, listener agents, voice stream tasks.", "headphones-1"),
+        ("Telemetry / Debug", "Cyber Visor", "goggles, visor, trace", "Telemetry scanners, trace analyzers, debuggers.", "goggles-1"),
+        ("Stealth / Security", "Ninja Mask & Bandana", "ninja, stealth, crypto", "Stealth operations, secure cryptosystems, audit.", "bandana-1"),
         ("Standard Worker", "Natural Antennae", "(Default / unassigned)", "General-purpose parallel worker tasks.", "worker-99")
     ]
 
@@ -519,7 +585,7 @@ def generate_roles_showcase():
 
     # Footer note
     foot_font = get_font(13, bold=False)
-    draw.text((60, H - 40), "Role names are matched automatically by substring regex inside Antigravity Swarm Board.", fill=(110, 116, 135), font=foot_font)
+    draw.text((60, H - 40), "Role names are matched automatically by substring regex inside Antigravity Swarm Board, with custom overrides in cosmetics.config.json.", fill=(110, 116, 135), font=foot_font)
 
     showcase_path = os.path.join(ASSETS_DIR, 'roles-showcase.png')
     img.save(showcase_path, 'PNG')
@@ -555,18 +621,18 @@ def generate_swarm_preview():
     meta_font = get_font(12, mono=True)
     draw.text((185, 50), "| Conv: 4c2f696e | 6 Active Workers", fill=(130, 135, 155), font=meta_font)
 
-    # Tabs (Overview, Board, Members, Graph, Raw)
-    tabs = [("Overview", False), ("Board (6)", True), ("Members (8)", False), ("Graph", False), ("Raw", False)]
-    tx = W - 490
+    # Tabs (Overview, Board, Members, Wardrobe, Graph, Raw)
+    tabs = [("Overview", False), ("Board (6)", True), ("Members (8)", False), ("Wardrobe", False), ("Graph", False), ("Raw", False)]
+    tx = W - 580
     tab_font = get_font(13, bold=True)
     for tname, active in tabs:
-        tw = int(tab_font.getlength(tname)) + 24
+        tw = int(tab_font.getlength(tname)) + 20
         if active:
             draw.rectangle([tx, 30 + header_h - 3, tx + tw, 30 + header_h], fill=(255, 199, 44))
-            draw.text((tx + 12, 48), tname, fill=(255, 199, 44), font=tab_font)
+            draw.text((tx + 10, 48), tname, fill=(255, 199, 44), font=tab_font)
         else:
-            draw.text((tx + 12, 48), tname, fill=(140, 145, 165), font=tab_font)
-        tx += tw + 10
+            draw.text((tx + 10, 48), tname, fill=(140, 145, 165), font=tab_font)
+        tx += tw + 8
 
     # Content Area Split: Left Hive Grid (400px), Right Board Feed (remaining)
     split_x = 450
@@ -578,11 +644,11 @@ def generate_swarm_preview():
 
     members = [
         ("coordinator", "Queen Coordinator", "working", "Assigning tasks"),
-        ("builder-1", "Builder (Auth)", "working", "Building patch.js"),
-        ("builder-2", "Builder (UI)", "working", "Aux pane UI tab"),
+        ("builder-1", "Builder (Config)", "working", "cosmetics.config.json"),
+        ("headphones-1", "Reviewer (Audio)", "working", "Audio feed stream"),
         ("verifier-1", "Verifier", "needs_you", "Tests pass (14/14)"),
-        ("researcher-1", "Researcher", "parked", "Indexed codebase"),
-        ("wizard-1", "Wizard", "working", "Optimizing prompt"),
+        ("goggles-1", "Telemetry (Visor)", "working", "Tracing event loop"),
+        ("bandana-1", "Security (Ninja)", "parked", "Crypto audit done"),
     ]
 
     my = 140
@@ -609,11 +675,11 @@ def generate_swarm_preview():
     draw.text((split_x + 30, 106), "LIVE BOARD FEED", fill=(170, 176, 200), font=left_font)
 
     feed = [
-        ("coordinator", "@coordinator", "2m ago", "Launched cosmetic patch task. Spawning builder-1 and verifier-1 for execution.", (255, 200, 60)),
-        ("builder-1", "@builder-1", "1m ago", "@coordinator Implemented 10 procedural headgear shaders into hive.js canvas pipeline.", (100, 200, 255)),
-        ("wizard-1", "@wizard-1", "45s ago", "@coordinator Verified pixel alignment and contrast ratios across light and dark backgrounds.", (180, 130, 255)),
-        ("verifier-1", "@verifier-1", "20s ago", "@coordinator Ran full integration test suite. Cache busting verified. All 14 tests passed.", (34, 197, 94)),
-        ("builder-2", "@builder-2", "Just now", "Generated ultra-crisp showcase graphic assets for GitHub documentation.", (255, 160, 60))
+        ("coordinator", "@coordinator", "2m ago", "Milestone v1.2: Config overrides, Wardrobe UI tab, and 3 new pixel hats.", (255, 200, 60)),
+        ("builder-1", "@builder-1", "1m ago", "@coordinator Implemented cosmetics.config.json with exact and regex overrides.", (100, 200, 255)),
+        ("headphones-1", "@headphones-1", "45s ago", "@coordinator Designed Headset, Cyber Visor, and Ninja Bandana procedural shaders.", (45, 212, 191)),
+        ("builder-2", "@builder-2", "30s ago", "@coordinator Integrated Wardrobe tab into Swarm Board sidecar pane with 8x live preview.", (255, 160, 60)),
+        ("verifier-1", "@verifier-1", "Just now", "@coordinator Verified patch.js CLI status/apply/restore/config and silent hooks.", (34, 197, 94))
     ]
 
     fy = 140
@@ -640,17 +706,18 @@ def generate_swarm_preview():
 # 4. GENERATE ANIMATED DEMO GIF (assets/demo.gif)
 # -------------------------------------------------------------
 def generate_demo_gif():
-    # 4 frames animated loop of bees buzzing and flapping
-    W, H = 640, 240
+    # 6 frames animated loop of bees buzzing and flapping
+    W, H = 680, 240
     frames = []
 
     # Hats showcase in demo
     showcase_bees = [
-        ('coordinator', 'Coordinator', 70, 110),
-        ('builder-1', 'Builder', 180, 110),
-        ('verifier-1', 'Verifier', 290, 110),
-        ('wizard-1', 'Wizard', 400, 110),
-        ('viking-1', 'Viking', 510, 110),
+        ('coordinator', 'Coordinator', 65, 110),
+        ('builder-1', 'Builder', 170, 110),
+        ('headphones-1', 'Headset', 275, 110),
+        ('goggles-1', 'Goggles', 380, 110),
+        ('bandana-1', 'Ninja', 485, 110),
+        ('verifier-1', 'Verifier', 590, 110),
     ]
 
     for f in range(6):
@@ -671,12 +738,12 @@ def generate_demo_gif():
             cur_y = by + bob
 
             # Shadow on floor
-            sh_w = 60
+            sh_w = 56
             sh_h = 16
             draw.ellipse([bx - sh_w // 2, 175 - bob // 2, bx + sh_w // 2, 175 + sh_h - bob // 2], fill=(10, 12, 18, 160))
 
             # Bee
-            bee = render_bee(name, 'flight', wing_frame, scale=3.8)
+            bee = render_bee(name, 'flight', wing_frame, scale=3.6)
             frame_img.paste(bee, (bx - bee.width // 2, cur_y - bee.height // 2), bee)
 
             # Label

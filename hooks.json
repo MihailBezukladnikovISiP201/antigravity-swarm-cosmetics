@@ -2,12 +2,7 @@
   "swarm-cosmetics-autoseed": {
     "SessionStart": [
       {
-        "command": "node scripts/patch.js apply"
-      }
-    ],
-    "PreInvocation": [
-      {
-        "command": "node scripts/patch.js apply"
+        "command": "node scripts/hook.js"
       }
     ],
     "PreToolUse": [
@@ -15,7 +10,7 @@
         "matcher": "swarm.*",
         "hooks": [
           {
-            "command": "node scripts/patch.js apply"
+            "command": "node scripts/hook.js"
           }
         ]
       }
