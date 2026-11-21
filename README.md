@@ -46,7 +46,7 @@ Headgear is rendered deterministically directly inside the HTML5 canvas pipeline
 | **Builder / Dev** | `builder`, `author`, `dev`, `code`, `parser`, `impl`, `fix`, `patch`, `engineer` | ⛑️ Yellow Hard Hat | Authors writing code, implementing patches & features |
 | **Verifier / QA** | `verifier`, `review`, `qa`, `test`, `audit`, `lint`, `check` | 🎓 Academic Mortarboard | Test runners, diff review, code verification |
 | **Researcher** | `research`, `scout`, `investig`, `search`, `doc`, `read`, `explore`, `analyst` | 🎩 Top Hat with Red Ribbon | Repository mapping, reading documentation, dependency analysis |
-| **Narrator** | `narrator`, `story`, `scribe`, `log`, `write`, `history` | 🪶 Plum Beret with Quill | System agent documenting high-level timeline & overview |
+| **Narrator** | `narrator`, `story`, `scribe`, `log`, `write`, `history` | ✒️ Plum Beret with Quill | System agent documenting high-level timeline & overview |
 | **Monitor** | `monitor`, `guard`, `watch`, `stall`, `dispatch`, `ping` | 👮 Officer Peaked Cap | Anti-stall watchdog and swarm activity monitor |
 | **Wizard / AI** | `wizard`, `magic`, `ai`, `model`, `prompt`, `llm`, `synth`, `brain` | 🧙 Pointed Wizard Hat | Prompt engineering, model tuning, LLM synthesis |
 | **Pirate / Security** | `pirate`, `sec`, `security`, `hack`, `pentest`, `redteam`, `exploit` | 🏴‍☠️ Pirate Tricorn & Eyepatch | Security audits, vulnerability checks, penetration testing |

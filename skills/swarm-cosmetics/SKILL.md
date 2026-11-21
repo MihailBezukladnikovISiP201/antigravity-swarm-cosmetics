@@ -15,7 +15,7 @@ description: Manage custom pixel hats for Antigravity Swarm bees based on agent 
 | **Builder / Engineer** | `builder`, `author`, `dev`, `code`, `parser`, `impl`, `fix`, `patch`, `engineer` | ⛑️ Желтая строительная каска | Разработка, фиксы, рефакторинг |
 | **Verifier / QA** | `verifier`, `review`, `qa`, `test`, `audit`, `lint`, `check` | 🎓 Конфедератка с золотой кисточкой | Запуск тестов, проверка diff'ов |
 | **Researcher / Analyst** | `research`, `scout`, `investig`, `search`, `doc`, `read`, `explore`, `analyst` | 🎩 Цилиндр с рубиновой лентой | Анализ кодовой базы, документация |
-| **Narrator** | `narrator`, `story`, `scribe`, `log`, `write`, `history` | 🪶 Фиолетовый берет с пером | Системный агент (скилл `swarm_narrator`), летописец |
+| **Narrator** | `narrator`, `story`, `scribe`, `log`, `write`, `history` | ✒️ Фиолетовый берет с пером | Системный агент (скилл `swarm_narrator`), летописец |
 | **Monitor / Dispatcher** | `monitor`, `guard`, `watch`, `stall`, `dispatch`, `ping` | 👮 Офицерская фуражка с кокардой | Системный агент (скилл `swarm_monitor`), анти-зависание |
 | **Wizard / AI** | `wizard`, `magic`, `ai`, `model`, `prompt`, `llm`, `synth`, `brain` | 🧙 Остроконечный колпак мага со звездой | Промптинг, генерация, интеграция нейросетей |
 | **Pirate / Security** | `pirate`, `sec`, `security`, `hack`, `pentest`, `redteam`, `exploit` | 🏴‍☠️ Треуголка с повязкой на глазу | Безопасность, пентест, аудит уязвимостей |
